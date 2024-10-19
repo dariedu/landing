@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Лендинг с обратным отсчетом</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 36px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>23 октября 15.00</h1>
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    // Устанавливаем дату обратного отсчета
+    var countDownDate = new Date("October 23, 2024 15:00:00").getTime();
+
+    // Обновляем таймер каждую секунду
+    var x = setInterval(function() {
+      // Текущее время
+      var now = new Date().getTime();
+
+      // Разница между текущим временем и временем обратного отсчета
+      var distance = countDownDate - now;
+
+      // Вычисляем дни, часы, минуты и секунды
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Отображаем результат
+      document.getElementById("countdown").innerHTML = days + "д " + hours + "ч " + minutes + "м " + seconds + "с ";
+
+      // Если обратный отсчет завершился, выводим сообщение
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Время вышло";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
