@@ -2,11 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>До презентации проекта Дари еду! осталось</title>
   <style>
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: #1F1F1F;
+      color: #F8F8F8;
       text-align: center;
       font-family: Arial, sans-serif;
       margin: 0;
@@ -19,23 +20,48 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 4vh;
       height: 100%;
+      padding: 2vw;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: 3rem;
+      margin-bottom: 2vh;
     }
 
     #countdown {
-      font-size: 36px;
+      font-size: 2rem;
       opacity: 0;
       animation: fadeIn 3s ease-in-out forwards;
       visibility: hidden;
+      background-color: #38AB78;
+      border-radius: 2rem;
+      width: 50vw;
+      max-width: 300px;
+      height: 8vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .countdown-container {
       height: 36px;
+      margin-bottom: 15vh;
+    }
+
+    .gif-container {
+      max-width: 15vw;
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    img {
+      width: 80%;
+      height: auto;
+      border-radius: 2rem;
+      padding: 1rem;
     }
 
     @keyframes fadeIn {
@@ -47,6 +73,38 @@
         visibility: visible;
       }
     }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      #countdown {
+        font-size: 1.5rem;
+        width: 70vw;
+        height: 6vh;
+      }
+
+      .gif-container {
+        max-width: 40vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      #countdown {
+        font-size: 1.25rem;
+        width: 80vw;
+        height: 6vh;
+      }
+
+      .gif-container {
+        max-width: 60vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -55,6 +113,9 @@
     <div class="countdown-container">
       <div id="countdown"></div>
     </div>
+    <div class="gif-container" id="gif-container">
+      <img id="gif"  src="mainLogo.gif" alt="логотип GIF">
+    </div>  
   </div>
 
   <script>
@@ -79,6 +140,18 @@
         document.getElementById("countdown").innerHTML = "Время вышло";
       }
     }, 1000);
+
+    // Плавное появление GIF через 3 секунды после появления обратного отсчета
+    setTimeout(function() {
+      var gifContainer = document.getElementById('gif-container');
+      gifContainer.style.opacity = 1;
+
+      // Заменяем GIF на статичное изображение через 3 секунды после его появления
+      setTimeout(function() {
+        document.getElementById('gif').src = 'mainLogo.png';
+      }, 600); // Заменяем через 3 секунды после появления GIF
+
+    }, 4000); // 3 секунды анимации + 3 секунды ожидания
   </script>
 </body>
 </html>
