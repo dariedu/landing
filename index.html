@@ -30,12 +30,11 @@
       margin-bottom: 2vh;
     }
 
-    #countdown {
+    #countdown, .push-button {
       font-size: 2rem;
-      opacity: 0;
-      animation: fadeIn 3s ease-in-out forwards;
-      visibility: hidden;
       background-color: #38AB78;
+      color: #F8F8F8;
+      border: none;
       border-radius: 2rem;
       width: 50vw;
       max-width: 300px;
@@ -43,11 +42,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: not-allowed;
+      opacity: 1;
+      transition: opacity 0.3s;
     }
 
-    .countdown-container {
-      height: 36px;
-      margin-bottom: 15vh;
+    .push-button {
+      background-color: #38AB78;
+      border: solid white 2px;
+      font-size: 36px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .push-button:hover {
+      background-color: #2f9165;
     }
 
     .gif-container {
@@ -79,7 +89,7 @@
         font-size: 2.5rem;
       }
 
-      #countdown {
+      #countdown, .push-button {
         font-size: 1.5rem;
         width: 70vw;
         height: 6vh;
@@ -95,7 +105,7 @@
         font-size: 2rem;
       }
 
-      #countdown {
+      #countdown, .push-button {
         font-size: 1.25rem;
         width: 80vw;
         height: 6vh;
@@ -111,16 +121,15 @@
   <div class="container">
     <h1>23 октября 15.00</h1>
     <div class="countdown-container">
-      <div id="countdown"></div>
+      <button id="countdown" disabled></button> <!-- Кнопка с отсчетом времени -->
     </div>
     <div class="gif-container" id="gif-container">
-      <img id="gif"  src="mainLogo.gif" alt="логотип GIF">
+      <img id="gif" src="mainLogoDark.gif" alt="логотип GIF">
     </div>  
   </div>
 
   <script>
-
-    var countDownDate = new Date("October 23, 2024 15:00:00").getTime();
+    var countDownDate = new Date("October 20, 2024 11:31:30").getTime();
 
     var x = setInterval(function() {
 
@@ -137,7 +146,10 @@
 
       if (distance < 0) {
         clearInterval(x);
-        document.getElementById("countdown").innerHTML = "Время вышло";
+        // Заменяем кнопку с отсчетом на активную кнопку "Push"
+        document.getElementById("countdown").outerHTML = `
+          <button class="push-button" onclick="goToLink()">Push</button>
+        `;
       }
     }, 1000);
 
@@ -148,10 +160,15 @@
 
       // Заменяем GIF на статичное изображение через 3 секунды после его появления
       setTimeout(function() {
-        document.getElementById('gif').src = 'mainLogo.png';
+        document.getElementById('gif').src = 'mainLogoDark.jpg';
       }, 600); // Заменяем через 3 секунды после появления GIF
 
     }, 4000); // 3 секунды анимации + 3 секунды ожидания
+
+    // Переход по ссылке при нажатии на кнопку
+    function goToLink() {
+      window.location.href = "https://drive.google.com/drive/folders/1EknnyHEXOx3rvPmjy0Q3mzUloVgFwNjn";
+    }
   </script>
 </body>
 </html>
